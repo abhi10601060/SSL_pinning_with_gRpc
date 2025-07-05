@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package bookshop;
+
+option go_package = "github.com/abhi1060/proto_example/bookshop_protos";
+
+service BookShopService{
+    rpc ListAll(Void) returns (ListAllResponse);
+    rpc AddBook(Book) returns (AddBookResponse);
+}
+
+message Void{
+
+}
+
+message Book{
+    int32 id = 1;
+    string name = 2;
+}
+
+message ListAllResponse{
+    repeated Book books = 1;
+    int32 count = 2;
+}
+
+message AddBookResponse{
+    bool isSuccessful = 1;
+    string message = 2;
+}
