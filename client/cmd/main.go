@@ -15,15 +15,14 @@ func main() {
 	router.GET("/", handler.ListAllhandler)
 	router.POST("/add", handler.AddBook)
 
-	log.Fatal(router.Run(":8080"))
+	log.Fatal(router.Run(":9000"))
 }
 
-
-func pong(c *gin.Context){
+func pong(c *gin.Context) {
 	c.JSON(
 		http.StatusOK,
 		gin.H{
-			"message" : "Pong",
+			"message": "Pong",
 		},
 	)
 }
