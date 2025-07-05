@@ -3,17 +3,32 @@ package grpc
 import (
 	"context"
 	"log"
+	"os"
 
 	pb "github.com/abhi1060/proto_example/bookshop_protos"
+	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
 
 var BookShopClient pb.BookShopServiceClient
+var envs map[string]string
+
+const (
+	grpcHostKey string = "GRPC_HOST"
+)
 
 func init() {
-	// Create gRPC server connection
-	conn, err := grpc.Dial("localhost:8081", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	grpcHost := os.Getenv("GRPC_HOST")
+	if grpcHost == "" {
+		envs, err := godotenv.Read(".env")
+		if err!=nil {
+			log.Println("error in reading .env " + err.Error())
+			return
+		}
+		grpcHost = envs[grpcHostKey]
+	}
+	conn, err := grpc.Dial(grpcHost, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Failed to connect to gRPC server: %v", err)
 	}
