@@ -1,20 +1,31 @@
 package handler
 
 import (
-	"log"
 	"net/http"
-
-	"github.com/abhi1060/rpc_client/model"
+	pb "github.com/abhi1060/proto_example/bookshop_protos"
+	"github.com/abhi1060/rpc_client/grpc"
 	"github.com/gin-gonic/gin"
 )
 
 func ListAllhandler(c *gin.Context) {
-	c.JSON(http.StatusOK,
-		model.ListAllBookResponse{Count: 2, Books: []model.Book{{Id: 1, Name: "Harry"}, {Id: 2, Name: "Potter"}}})
+	res, err := grpc.ListAll()
+
+	if err != nil {
+		c.JSON(
+			http.StatusInternalServerError,
+			gin.H{
+				"message": err.Error(),
+			},
+		)
+		c.Abort()
+		return
+	}
+
+	c.JSON(http.StatusOK, res)
 }
 
 func AddBook(ctx *gin.Context) {
-	book := model.Book{}
+	book := pb.Book{}
 	err := ctx.BindJSON(&book)
 	if err != nil {
 		ctx.JSON(
@@ -27,7 +38,16 @@ func AddBook(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{"message": "Book added successfully"})
+	res, err := grpc.AddBook(&book)
+	if err != nil {
+		ctx.JSON(
+		http.StatusInternalServerError,
+		gin.H{
+			"message" : "internal server error", 
+		})
+		ctx.Abort()
+		return
+	}
 
-	log.Println(book)
+	ctx.JSON(http.StatusOK, res)
 }
