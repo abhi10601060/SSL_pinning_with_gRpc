@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package bookshop;
 
-option go_package = "github.com/abhi1060/proto_example/bookshop_protos";
+option go_package = "github.com/abhi1060/proto_example/bookshop_protos;bookshop_protos";
 
 service BookShopService{
     rpc ListAll(Void) returns (ListAllResponse);

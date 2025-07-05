@@ -230,7 +230,7 @@ const file_BookShop_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x01(\tR\amessage2}\n" +
 	"\x0fBookShopService\x124\n" +
 	"\aListAll\x12\x0e.bookshop.Void\x1a\x19.bookshop.ListAllResponse\x124\n" +
-	"\aAddBook\x12\x0e.bookshop.Book\x1a\x19.bookshop.AddBookResponseB3Z1github.com/abhi1060/proto_example/bookshop_protosb\x06proto3"
+	"\aAddBook\x12\x0e.bookshop.Book\x1a\x19.bookshop.AddBookResponseBCZAgithub.com/abhi1060/proto_example/bookshop_protos;bookshop_protosb\x06proto3"
 
 var (
 	file_BookShop_proto_rawDescOnce sync.Once
