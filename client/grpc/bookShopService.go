@@ -22,7 +22,7 @@ func init() {
 	grpcHost := os.Getenv("GRPC_HOST")
 	if grpcHost == "" {
 		envs, err := godotenv.Read(".env")
-		if err!=nil {
+		if err != nil {
 			log.Println("error in reading .env " + err.Error())
 			return
 		}
@@ -45,7 +45,7 @@ func ListAll() (*pb.ListAllResponse, error) {
 	return res, nil
 }
 
-func AddBook(book *pb.Book) (*pb.AddBookResponse,error){
+func AddBook(book *pb.Book) (*pb.AddBookResponse, error) {
 	res, err := BookShopClient.AddBook(context.Background(), book)
 	if err != nil {
 		return nil, err

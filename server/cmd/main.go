@@ -41,7 +41,7 @@ func (s *bookShopServer) AddBook(ctx context.Context, req *pb.Book) (*pb.AddBook
 }
 
 func main() {
-	lis, err := net.Listen("tcp", ":8081")
+	lis, err := net.Listen("tcp", ":9001")
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
